@@ -1,0 +1,123 @@
+{
+  "scope": {
+    "programId": "owasp-juice-shop",
+    "programName": "OWASP Juice Shop Public Bug Bounty Analog",
+    "inScope": [
+      {
+        "target": "https://juice-shop.herokuapp.com",
+        "type": "url",
+        "eligibleForBounty": true
+      },
+      {
+        "target": "/rest/user/login",
+        "type": "api",
+        "eligibleForBounty": true
+      },
+      {
+        "target": "/api/Feedbacks",
+        "type": "api",
+        "eligibleForBounty": true
+      },
+      {
+        "target": "/rest/basket",
+        "type": "api",
+        "eligibleForBounty": true
+      },
+      {
+        "target": "https://github.com/juice-shop/juice-shop",
+        "type": "repo",
+        "eligibleForBounty": true
+      }
+    ],
+    "outOfScope": [
+      {
+        "target": "*.herokuapp.com infrastructure",
+        "type": "domain",
+        "eligibleForBounty": false
+      },
+      {
+        "target": "third-party payment gateways",
+        "type": "domain",
+        "eligibleForBounty": false
+      }
+    ],
+    "policyNotes": [
+      "Public educational vulnerability research only.",
+      "No automated volumetric scanning or denial of service.",
+      "No testing against third-party hosting infrastructure."
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "ASSET-01",
+      "name": "Juice Shop Core Storefront",
+      "type": "web",
+      "uri": "https://juice-shop.herokuapp.com",
+      "verified": true
+    },
+    {
+      "assetId": "ASSET-02",
+      "name": "Juice Shop Authentication API",
+      "type": "api",
+      "uri": "https://juice-shop.herokuapp.com/rest/user/login",
+      "verified": true
+    },
+    {
+      "assetId": "ASSET-03",
+      "name": "Juice Shop Customer Feedback API",
+      "type": "api",
+      "uri": "https://juice-shop.herokuapp.com/api/Feedbacks",
+      "verified": true
+    },
+    {
+      "assetId": "ASSET-04",
+      "name": "Juice Shop Basket API",
+      "type": "api",
+      "uri": "https://juice-shop.herokuapp.com/rest/basket",
+      "verified": true
+    }
+  ],
+  "disclosedReports": [
+    {
+      "reportId": "DISC-001",
+      "title": "SQL Injection in User Login - Admin Authentication Bypass",
+      "cwe": "CWE-89",
+      "severity": "critical",
+      "asset": "https://juice-shop.herokuapp.com/rest/user/login",
+      "summary": "Unsanitized email parameter in /rest/user/login allows authentication bypass via SQL injection payload.",
+      "disclosedAt": "2025-01-15"
+    },
+    {
+      "reportId": "DISC-002",
+      "title": "Improper Access Control in Customer Feedback API",
+      "cwe": "CWE-284",
+      "severity": "medium",
+      "asset": "https://juice-shop.herokuapp.com/api/Feedbacks",
+      "summary": "Unauthenticated POST requests allowed to /api/Feedbacks endpoint without authorization validation.",
+      "disclosedAt": "2025-02-10"
+    }
+  ],
+  "reconNotes": [
+    {
+      "noteId": "RECON-001",
+      "target": "/rest/user/login",
+      "tool": "zap",
+      "observation": "POST /rest/user/login accepts JSON credentials without rate limiting",
+      "timestamp": "2025-05-20"
+    },
+    {
+      "noteId": "RECON-002",
+      "target": "/api/Feedbacks",
+      "tool": "semgrep",
+      "observation": "feedback router mounts unauthenticated handlers",
+      "timestamp": "2025-05-20"
+    }
+  ],
+  "provenance": {
+    "source": "OWASP Juice Shop Public Analog",
+    "timestamp": "2026-09-08T00:00:00Z",
+    "target": "OWASP Juice Shop v17.0.0",
+    "programId": "owasp-juice-shop",
+    "isPublicOrOwned": true
+  }
+}

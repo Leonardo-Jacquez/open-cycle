@@ -1,0 +1,17 @@
+{
+  "name": "open-cycle",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Public-source research protocol for an AppSec AI wall and bug-bounty Layer 1 adapter",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "test": "tsx --test test/*.test.ts",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@types/node": "^26.5.0",
+    "tsx": "^4.23.13",
+    "typescript": "^7.0.2"
+  }
+}

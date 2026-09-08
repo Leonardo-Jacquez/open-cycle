@@ -20,6 +20,7 @@ AGENTS.md.
 | Deterministic delta / drop / collapse / evaluator | Scripts count. No-LLM packet score. |
 | Envelope-only drafts, HITL apply/sign | Four tasks. Model cannot mutate tickets or the packet. |
 | This protocol as single canonical copy | PROTOCOL.md (prose) · protocol.ts (Brief renders it) |
+| Bug-bounty Layer 1 adapter + Q-SCOPE / Q-DUP / Q-IMPACT | Bounty Layer 1 pull + Q-SCOPE / Q-DUP / Q-IMPACT query intent + report/severity/submit-note tasks |
 | Sebas | GitHub librarian. Distinct from `se-release-engineer`. Lives in this repo and in `Leonardo-Jacquez/agent-teams-plugin`. |
 
 ## Contracted
@@ -28,7 +29,6 @@ PROTOCOL.md BUILD table is the list. Each row has a labeled issue.
 
 1. Compiled knowledge graph as the only Layer 3 store — [#1](https://github.com/Leonardo-Jacquez/open-cycle/issues/1)
 2. Executable write hook beyond UI (AST / PreToolUse analog) — [#2](https://github.com/Leonardo-Jacquez/open-cycle/issues/2)
-3. Bug-bounty Layer 1 adapter + Q-SCOPE / Q-DUP / Q-IMPACT — [#3](https://github.com/Leonardo-Jacquez/open-cycle/issues/3)
 4. Independent eval harness as CI (no-LLM, regression-locked) — [#4](https://github.com/Leonardo-Jacquez/open-cycle/issues/4)
 
 ## Waiting on the owner
