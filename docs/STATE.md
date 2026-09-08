@@ -1,7 +1,7 @@
 # Where this project stands
 
-**Last verified:** 2026-09-08, protocol rev `2026-09-08`. This commit is the
-public record landing. Measured against PROTOCOL.md in this tree, not relayed.
+**Last verified:** 2026-09-08, `main` `58aedb9`, protocol rev `2026-09-08`.
+Measured against PROTOCOL.md in this tree, not relayed.
 
 This is the only owner-facing status file. `PROTOCOL.md` is the canon.
 `docs/adr/` is why. Merged PRs on this repo are the ground truth for the record.
@@ -20,17 +20,16 @@ AGENTS.md.
 | Deterministic delta / drop / collapse / evaluator | Scripts count. No-LLM packet score. |
 | Envelope-only drafts, HITL apply/sign | Four tasks. Model cannot mutate tickets or the packet. |
 | This protocol as single canonical copy | PROTOCOL.md (prose) · protocol.ts (Brief renders it) |
-| Sebas | GitHub librarian. Distinct from `se-release-engineer`. |
+| Sebas | GitHub librarian. Distinct from `se-release-engineer`. Lives in this repo and in `Leonardo-Jacquez/agent-teams-plugin`. |
 
 ## Contracted
 
-PROTOCOL.md BUILD table is the list. Each row has (or must have) a labeled
-issue. Do not treat a row as in-progress without an issue.
+PROTOCOL.md BUILD table is the list. Each row has a labeled issue.
 
-1. Compiled knowledge graph as the only Layer 3 store.
-2. Executable write hook beyond UI (AST / PreToolUse analog).
-3. Bug-bounty Layer 1 adapter + Q-SCOPE / Q-DUP / Q-IMPACT.
-4. Independent eval harness as CI (no-LLM, regression-locked).
+1. Compiled knowledge graph as the only Layer 3 store — [#1](https://github.com/Leonardo-Jacquez/open-cycle/issues/1)
+2. Executable write hook beyond UI (AST / PreToolUse analog) — [#2](https://github.com/Leonardo-Jacquez/open-cycle/issues/2)
+3. Bug-bounty Layer 1 adapter + Q-SCOPE / Q-DUP / Q-IMPACT — [#3](https://github.com/Leonardo-Jacquez/open-cycle/issues/3)
+4. Independent eval harness as CI (no-LLM, regression-locked) — [#4](https://github.com/Leonardo-Jacquez/open-cycle/issues/4)
 
 ## Waiting on the owner
 
