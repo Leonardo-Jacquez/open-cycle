@@ -174,7 +174,7 @@ no-LLM evaluator, instruction/context/output caps, Q-CLUSTER / Q-FINDING shape.
 | This protocol as single canonical copy | shipped |
 | Compiled knowledge graph (Layer 3 store) | contracted |
 | Executable write hook beyond UI (AST / PreToolUse) | contracted |
-| Bug-bounty Layer 1 adapter + Q-SCOPE / Q-DUP / Q-IMPACT | contracted |
+| Bug-bounty Layer 1 adapter + Q-SCOPE / Q-DUP / Q-IMPACT | shipped |
 | Independent eval harness as CI (no-LLM, regression-locked) | contracted |
 
 ## Target and pins
