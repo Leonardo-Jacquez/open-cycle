@@ -27,7 +27,7 @@ Pointers name associated pulls, files, and data. They are not the contents.
 | `BB-XSS-NOPOC` | self | intake, no PoC |
 | `BB-ADVISORY` | self | v17 Security Advisory |
 
-Queries that read this index: `Q-KNOW`, `Q-RECORD`, `Q-CLUSTER`, `Q-FINDING`.
+Queries that read this index: `Q-KNOW`, `Q-RECORD`, `Q-CLUSTER`, `Q-FINDING`. `Q-ORCH` publishes the ready set and collision pointers into the same envelope shape.
 Delta counts stay a script (`Q-DELTA`), not a graph walk.
 
 Canon: [PROTOCOL.md](../PROTOCOL.md). Why: [ADR 0005](../docs/adr/0005-organized-findings-index.md).

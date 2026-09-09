@@ -1,6 +1,6 @@
 # Where this project stands
 
-**Last verified:** 2026-09-08, protocol rev `2026-09-08`, ADR 0006, SHA `7c040af`.
+**Last verified:** 2026-09-08, protocol rev `2026-09-08`, ADR 0006 A1. Measured in this tree.
 Measured against PROTOCOL.md in this tree, not relayed.
 
 This is the only owner-facing status file. `PROTOCOL.md` is the canon.
@@ -23,7 +23,7 @@ a PR that restates the canon in README, AGENTS.md, or INDEX.md.
 | Envelope-only drafts, HITL apply/sign | Four tasks. Model cannot mutate tickets or the packet. |
 | This protocol as single canonical copy | PROTOCOL.md (prose) · protocol.ts (Brief renders it) |
 | Organized findings index + pointers | `knowledge.ts` compile-once. Map: `knowledge/INDEX.md`. Agents follow pointers. |
-| Orchestrator DAG + collision scan | `orchestrate.ts`. Brief Orch tab. C-ORCH. Human picks among ready nodes. |
+| Orchestrator DAG + collision scan | `orchestrate.ts` snapshot. Ready/done/blocked from cycle facts. Q-ORCH envelope. Sign blocked on X-GONE-OPEN. |
 | Sebas | GitHub librarian. Distinct from `se-release-engineer`. |
 
 ## Contracted
@@ -39,9 +39,9 @@ PROTOCOL.md BUILD table is the list. Each row has a labeled issue.
 ## Waiting on the owner
 
 None. Next prove: one Juice Shop cluster through the wall, human-signed packet,
-drafts citing index ids. On v17, Orch should flag JUICE-7 and JUICE-9 as
-X-GONE-OPEN until evidence is written. Then Layer 1 bounty adapter — swap
-adapters only; bounty stays gated on a signed packet.
+drafts citing index ids. On v17, Orch ready set is triage and close. JUICE-7
+and JUICE-9 stay X-GONE-OPEN until evidence is written. Sign stays blocked.
+Then Layer 1 bounty adapter — swap adapters only.
 
 ## Standing rules that govern the record
 

@@ -40,7 +40,7 @@ Raising a cap needs an owner-ratified ADR.
 ## Harness
 
 The research bench *is* the loop: Pulls → Knowledge → Queries → Triage → Tickets → Packet.
-Deterministic: findings index, delta, drop rules, collapse, refuse-on-empty, no-LLM evaluator, declared DAG + collision scan.
+Deterministic: findings index, delta, drop rules, collapse, refuse-on-empty, no-LLM evaluator, declared DAG + collision scan, node state from cycle facts. Q-ORCH is the ready-set envelope.
 Probabilistic: four draft tasks (`triage` \| `ticket` \| `close` \| `packet`).
 Control flow stays in code. The orchestrator publishes the DAG. The human picks among ready nodes.
 

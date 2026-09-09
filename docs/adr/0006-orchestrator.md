@@ -52,3 +52,15 @@ C-ORCH is the constraint. K-FLOW stays: humans pick among ready nodes.
 - Bounty Layer 1 stays gated on a signed AppSec packet.
 - A second DAG markdown is a C-COPY violation. orchestrate.ts is the canon;
   the Orch tab renders it.
+
+## Amendment A1 (2026-09-08)
+
+`ready` is not "requires exist." That made every node except bounty ready.
+
+- **done** is an observable cycle fact (pulls exist, worklist decided, packet drafted, signed, no X-GONE-OPEN).
+- **ready** means requires are done, this node is not done, and no collision blocks it.
+- **blocked** names the missing require or the collision id.
+- Close requires delta only, so gone-open mitigation can run beside triage.
+- Sign requires packet and close. X-GONE-OPEN therefore blocks the stamp until evidence exists.
+- Collisions point at a knowledge record and a mitigate node. Q-ORCH publishes that snapshot as an envelope. Agents follow pointers. They do not get a dump of the DAG.
+- The human still picks among ready nodes. The model does not.

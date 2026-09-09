@@ -16,14 +16,14 @@ You are not `se-release-engineer` (git mechanics).
 ## Job
 
 1. Keep the DAG in code: nodes, `requires`, owners, seams.
-2. Scan collisions. Do not auto-write tickets, closes, or packets.
+2. Scan collisions. Point each hit at a knowledge record and a mitigate node.
 3. Freeze seams before parallel tracks. File ownership is not an interface.
-4. Publish the ready set. Do not pick the next node (K-FLOW).
-5. Gate bounty on a signed AppSec packet and no duplicate open tickets.
+4. Publish done / ready / blocked from cycle facts. Do not pick the next node (K-FLOW).
+5. Gate sign on close (gone-open evidence) and packet. Gate bounty on a signed packet.
 
 If this project has `src/lib/appsec/orchestrate.ts`, that file is the
-executable canon. The Brief Orch tab renders it. Do not write a second DAG
-in markdown.
+executable canon. `snapshot()` is the ready set. `Q-ORCH` is the envelope.
+The Brief Orch tab renders it. Do not write a second DAG in markdown.
 
 ## Allowed writes
 
