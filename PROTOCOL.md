@@ -8,7 +8,8 @@ layers, harness, graph, contracts, and the port map. Routes and the Brief render
 it (via `src/lib/appsec/protocol.ts` in the research bench). They do not restate
 it. README.md is a map. AGENTS.md is a pointer. ADRs are why. STATE.md is now.
 
-Invariants that must execute live in `engine.ts` / `queries.ts` / `ai.ts` — not here.
+Invariants that must execute live in `engine.ts` / `queries.ts` / `ai.ts` /
+`knowledge.ts` / `orchestrate.ts` — not here.
 
 ---
 
@@ -46,6 +47,7 @@ of record. Not a live vendor export.
 | C-SOR | Do not invent a system of record. Tickets here are a research analog. |
 | C-COPY | One canonical copy of this protocol. Routes render it; they do not restate it. |
 | C-POINT | Agents share one compiled findings index. They follow pointers. They do not each get a dump. |
+| C-ORCH | Dependencies are a declared DAG in code. The orchestrator publishes it and scans collisions. The model does not sequence work. File ownership is not an interface freeze. |
 
 ## Modeled after
 
@@ -70,6 +72,7 @@ of record. Not a live vendor export.
 - Open tickets name a file or location.
 - Drafts cite only IDs that appear in the envelope.
 - Gone ≠ fixed: closes need evidence text.
+- Collision scan flags gone-open tickets until evidence is written.
 - Human signed the packet.
 
 **Fail**
@@ -79,6 +82,7 @@ of record. Not a live vendor export.
 - Empty envelope still produces a draft.
 - Two tickets for one SQLi (SAST + DAST).
 - Trivy lockfile row treated as proven in-prod.
+- Model picks the next node.
 
 ## Layers
 
@@ -104,14 +108,16 @@ state, verification. This app is that loop. The model is a subroutine.
 - Refuse-on-empty envelopes
 - Packet evaluator (no LLM)
 - Zod on the draft server fn
+- Declared DAG + collision scan
 
 **Probabilistic pool**
 
 - Sentence drafts from an envelope
 - Four small tasks, not one mega-agent
 
-**Dynamic workflow:** the human picks the next named query. That is a dynamic
-workflow without handing control flow to the model. Factor 8: own the DAG.
+**Dynamic workflow:** the orchestrator publishes the DAG. The human picks among
+ready nodes. That is a dynamic workflow without handing control flow to the
+model. Factor 8: own the DAG.
 
 ## Knowledge graph
 
@@ -139,7 +145,7 @@ INDEX or PROTOCOL into a system prompt.
 | K-LINE | Line / file contracts | Invariants in `engine.ts`. Protocol is data. Draft prompt stays under ~15 lines. Surgical edits; no speculative refactors in the wall. | Karpathy-style halt-when-confused. Move gates out of English into executable checks (here: drop rules + evaluator, not an AST hook yet). |
 | K-IO | I/O schema | Input: `{ task, queryId, envelope }`. Output: `{ ok, text \| error }`. `Envelope.ok === false` → REFUSE. | 12-factor #4: tools are structured outputs, not prose side effects. |
 | K-WRITE | Write guard | Model cannot mutate decisions, tickets, or the packet. Apply is a human click. Sign is a human click. | 12-factor #7 (contact the human) plus a PreToolUse analog: no write tool is bound to the model. |
-| K-FLOW | Control flow | Code owns the step order. The model does not pick tools. Humans pick queries. | 12-factor #8. Dynamic workflow = which named query you run, not an agent for-loop. |
+| K-FLOW | Control flow | Code owns the step order. The orchestrator publishes the DAG. The model does not pick tools. Humans pick among ready nodes. | 12-factor #8. Dynamic workflow = which ready node you run, not an agent for-loop. |
 | K-SMALL | Small agents | Four tasks: `triage` \| `ticket` \| `close` \| `packet`. No mega-agent. | 12-factor #10. One envelope, one job. |
 
 ## Port
@@ -163,10 +169,11 @@ no-LLM evaluator, instruction/context/output caps, Q-CLUSTER / Q-FINDING shape.
 1. Stay on v17. v16 is the baseline pin already in the pulls.
 2. Open Pulls. Read raw JSON. Layer 1. Normalize is automatic and inspectable.
 3. Open Knowledge. Organized findings, pointers only. This is what every agent that needs facts reads.
-4. Run Queries. They return subgraphs of the index. Empty results refuse. These envelopes are the only thing a model may read.
-5. Walk Triage → Tickets → Packet once with Manual on. Sign it.
-6. Reset. Repeat with AI on. Same decisions, less typing. Drafts must cite envelope IDs.
-7. Score on Packet: short list, pins line up, tickets a developer can use, tools became decisions, no invented IDs.
+4. Open Brief → Orch. The DAG is code. On v17 the scan flags JUICE-7 and JUICE-9 as X-GONE-OPEN (gone ≠ fixed). Bounty stays gated until the packet is signed.
+5. Run Queries. They return subgraphs of the index. Empty results refuse. These envelopes are the only thing a model may read.
+6. Walk Triage → Tickets → Packet once with Manual on. Sign it.
+7. Reset. Repeat with AI on. Same decisions, less typing. Drafts must cite envelope IDs.
+8. Score on Packet: short list, pins line up, tickets a developer can use, tools became decisions, no invented IDs.
 
 ## Build
 
@@ -178,6 +185,7 @@ no-LLM evaluator, instruction/context/output caps, Q-CLUSTER / Q-FINDING shape.
 | Envelope-only drafts, HITL apply/sign | shipped |
 | This protocol as single canonical copy | shipped |
 | Organized findings index + pointers (Layer 3 store) | shipped |
+| Orchestrator DAG + collision scan | shipped |
 | Executable write hook beyond UI (AST / PreToolUse) | contracted |
 | Bug-bounty Layer 1 adapter + Q-SCOPE / Q-DUP / Q-IMPACT | contracted |
 | Independent eval harness as CI (no-LLM, regression-locked) | contracted |
@@ -206,9 +214,15 @@ Layer 1 pulls are **research reconstructions** shaped like those public tools,
 labeled as such, from published Juice Shop facts and writeups — not live vendor
 exports.
 
-## GitHub surface (Sebas)
+## GitHub surface (Sebas) and orchestrator
 
 Sebas (`agents/sebas.md`) is the librarian for this record: layout, labels,
 issues, ADR index, README-as-map, `knowledge/INDEX.md`. It does not write
 application code. Mechanical git/PR is `se-release-engineer`. The two roles do
 not collapse.
+
+The orchestrator (`agents/orchestrator.md`) owns the declared DAG and the
+collision scan. Executable copy: `src/lib/appsec/orchestrate.ts`. It is not the
+coordinator (never writes code), not `se-delivery-lead` (runs one unit PLAN →
+PR), not sebas, not `se-release-engineer`. File ownership is not an interface
+freeze. The human picks among ready nodes.

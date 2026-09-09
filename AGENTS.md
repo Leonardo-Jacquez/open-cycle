@@ -12,6 +12,7 @@ pointer, not a restatement.
 | Why a decision was made | its ADR in `docs/adr/` |
 | Owner-facing status | `docs/STATE.md` |
 | GitHub surface (layout, labels, issues, map discipline) | `agents/sebas.md` |
+| Dependencies, collisions, seam freeze | `agents/orchestrator.md` |
 | How a change lands on GitHub | `se-release-engineer` in the agent-teams plugin — not this file |
 
 Owner-facing status lives in `docs/STATE.md`. Merged PRs on GitHub are the ground
@@ -22,8 +23,9 @@ truth. The Brief UI renders `src/lib/appsec/protocol.ts`; those facts must match
 
 Human on every write. The model drafts sentences from a named query envelope.
 Apply and sign are explicit human clicks. Sebas may write only the GitHub surface
-listed in `agents/sebas.md`. Application code is the Software Engineering team.
-No agent pushes the default branch.
+listed in `agents/sebas.md`. The orchestrator may write only the DAG/collision
+module listed in `agents/orchestrator.md`. Application code is the Software
+Engineering team. No agent pushes the default branch.
 
 ## Instruction and line budgets — hard
 
@@ -38,9 +40,9 @@ Raising a cap needs an owner-ratified ADR.
 ## Harness
 
 The research bench *is* the loop: Pulls → Knowledge → Queries → Triage → Tickets → Packet.
-Deterministic: findings index, delta, drop rules, collapse, refuse-on-empty, no-LLM evaluator.
+Deterministic: findings index, delta, drop rules, collapse, refuse-on-empty, no-LLM evaluator, declared DAG + collision scan.
 Probabilistic: four draft tasks (`triage` \| `ticket` \| `close` \| `packet`).
-Control flow stays in code. The human picks the next named query.
+Control flow stays in code. The orchestrator publishes the DAG. The human picks among ready nodes.
 
 ## Stop rules
 
