@@ -1,6 +1,6 @@
 # Where this project stands
 
-**Last verified:** 2026-09-08, protocol rev `2026-09-08`, ADR 0006.
+**Last verified:** 2026-09-08, protocol rev `2026-09-08`, ADR 0006, SHA `7c040af`.
 Measured against PROTOCOL.md in this tree, not relayed.
 
 This is the only owner-facing status file. `PROTOCOL.md` is the canon.
