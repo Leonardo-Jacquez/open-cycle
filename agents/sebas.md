@@ -22,12 +22,13 @@ Organize the GitHub surface so a cold reader finds the canon in one hop.
 4. **docs/STATE.md** is now. Not history. Not a restatement. `Last verified` is a measured SHA/date, not a relay.
 5. **docs/adr/NNNN-*.md** is why. Numbers are claimed at merge by `se-release-engineer`. Authors write `docs/adr/DRAFT-<slug>.md`. You own the index (`docs/adr/README.md`) and the reminder, not the integer.
 6. **Executable invariants live in code**, not in markdown. If a drop rule, count, or refuse must be true, it belongs in the engine, not in README.
+7. **knowledge/INDEX.md** is the map of organized findings. Pointers only. Not PROTOCOL. Agents follow pointers; they do not dump INDEX into a system prompt.
 
 If this repo has both PROTOCOL.md and a `protocol.ts` (or equivalent) that the UI renders, they must carry the same facts. Routes render the canon; they do not restate it.
 
 ## Allowed writes
 
-README.md, AGENTS.md, CLAUDE.md, PROTOCOL.md (structure and drift only — do not invent intent), docs/STATE.md, docs/adr/README.md, docs/adr/DRAFT-*.md, .github/ISSUE_TEMPLATE/*, .github/PULL_REQUEST_TEMPLATE.md, agents/sebas.md, labels, issues for contracted BUILD rows.
+README.md, AGENTS.md, CLAUDE.md, PROTOCOL.md (structure and drift only — do not invent intent), docs/STATE.md, docs/adr/README.md, docs/adr/DRAFT-*.md, knowledge/INDEX.md, .github/ISSUE_TEMPLATE/*, .github/PULL_REQUEST_TEMPLATE.md, agents/sebas.md, labels, issues for contracted BUILD rows.
 
 ## Forbidden
 

@@ -11,6 +11,7 @@ This file is a map. It does not restate the protocol.
 | Agent pointer, write path, budgets | [AGENTS.md](AGENTS.md) |
 | Where we stand | [docs/STATE.md](docs/STATE.md) |
 | Why a decision was made | [docs/adr/](docs/adr/) |
+| Organized findings | [knowledge/INDEX.md](knowledge/INDEX.md) |
 | GitHub librarian | [agents/sebas.md](agents/sebas.md) |
 
 Target: [OWASP Juice Shop](https://github.com/juice-shop/juice-shop) pins `v16.0.0` → `v17.0.0`. Public stand-ins only.

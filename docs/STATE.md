@@ -1,45 +1,50 @@
 # Where this project stands
 
-**Last verified:** 2026-09-08, `main` `58aedb9`, protocol rev `2026-09-08`.
+**Last verified:** 2026-09-08, protocol rev `2026-09-08`, ADR 0005.
 Measured against PROTOCOL.md in this tree, not relayed.
 
 This is the only owner-facing status file. `PROTOCOL.md` is the canon.
-`docs/adr/` is why. Merged PRs on this repo are the ground truth for the record.
+`knowledge/INDEX.md` is the findings map. `docs/adr/` is why. Merged PRs on
+this repo are the ground truth for the record.
 
 This repository is the **public protocol record**. The research bench UI is a
 separate runtime that renders `src/lib/appsec/protocol.ts`. Those facts must
-match PROTOCOL.md. Sebas fails a PR that restates the canon in README or
-AGENTS.md.
+match PROTOCOL.md. The compiled index lives in `src/lib/appsec/knowledge.ts`.
+Sebas fails a PR that restates the canon in README, AGENTS.md, or INDEX.md.
 
 ## Built
 
 | Item | Notes |
 |---|---|
 | Four-layer wall on Juice Shop pins | `v16.0.0` (`a9b1dff`) baseline → `v17.0.0` (`1c04f0e`) current |
-| Named query registry + refuse-on-empty | Q-DELTA, Q-CLUSTER, Q-WORKLIST, Q-NOISE, Q-CLOSE, Q-GAPS, Q-PACKET, Q-FINDING |
+| Named query registry + refuse-on-empty | Q-KNOW, Q-RECORD, Q-DELTA, Q-CLUSTER, Q-WORKLIST, Q-NOISE, Q-CLOSE, Q-GAPS, Q-PACKET, Q-FINDING |
 | Deterministic delta / drop / collapse / evaluator | Scripts count. No-LLM packet score. |
 | Envelope-only drafts, HITL apply/sign | Four tasks. Model cannot mutate tickets or the packet. |
 | This protocol as single canonical copy | PROTOCOL.md (prose) · protocol.ts (Brief renders it) |
-| Sebas | GitHub librarian. Distinct from `se-release-engineer`. Lives in this repo and in `Leonardo-Jacquez/agent-teams-plugin`. |
+| Organized findings index + pointers | `knowledge.ts` compile-once. Map: `knowledge/INDEX.md`. Agents follow pointers. |
+| Sebas | GitHub librarian. Distinct from `se-release-engineer`. |
 
 ## Contracted
 
 PROTOCOL.md BUILD table is the list. Each row has a labeled issue.
 
-1. Compiled knowledge graph as the only Layer 3 store — [#1](https://github.com/Leonardo-Jacquez/open-cycle/issues/1)
-2. Executable write hook beyond UI (AST / PreToolUse analog) — [#2](https://github.com/Leonardo-Jacquez/open-cycle/issues/2)
-3. Bug-bounty Layer 1 adapter + Q-SCOPE / Q-DUP / Q-IMPACT — [#3](https://github.com/Leonardo-Jacquez/open-cycle/issues/3)
-4. Independent eval harness as CI (no-LLM, regression-locked) — [#4](https://github.com/Leonardo-Jacquez/open-cycle/issues/4)
+1. Executable write hook beyond UI (AST / PreToolUse analog) — [#2](https://github.com/Leonardo-Jacquez/open-cycle/issues/2)
+2. Bug-bounty Layer 1 adapter + Q-SCOPE / Q-DUP / Q-IMPACT — [#3](https://github.com/Leonardo-Jacquez/open-cycle/issues/3)
+3. Independent eval harness as CI (no-LLM, regression-locked) — [#4](https://github.com/Leonardo-Jacquez/open-cycle/issues/4)
+
+[#1](https://github.com/Leonardo-Jacquez/open-cycle/issues/1) (compiled Layer 3 store) discharged by ADR 0005.
 
 ## Waiting on the owner
 
-None for this landing. Next prove: one Juice Shop cluster through the wall,
-human-signed packet. Then Layer 1 bounty adapter — swap adapters only.
+None. Next prove: one Juice Shop cluster through the wall, human-signed packet,
+drafts citing index ids. Then Layer 1 bounty adapter — swap adapters only.
 
 ## Standing rules that govern the record
 
 - **PROTOCOL.md is the prose canon.** README is a map. AGENTS.md is a pointer.
-  Routes render; they do not restate.
+  `knowledge/INDEX.md` is the findings map. Routes render; they do not restate.
+- **Agents share one findings index.** They follow pointers. They do not each
+  get a dump.
 - **Public data only.** Reconstructions labeled. No customer tenants, SOWs,
   logos, or Jira.
 - **Scripts count. Humans write. The model drafts.**

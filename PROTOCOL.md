@@ -45,6 +45,7 @@ of record. Not a live vendor export.
 | C-REACH | Trivy does not do function-level reachability. `imported=*` is an extra engine, labeled. |
 | C-SOR | Do not invent a system of record. Tickets here are a research analog. |
 | C-COPY | One canonical copy of this protocol. Routes render it; they do not restate it. |
+| C-POINT | Agents share one compiled findings index. They follow pointers. They do not each get a dump. |
 
 ## Modeled after
 
@@ -84,8 +85,8 @@ of record. Not a live vendor export.
 | # | Name | Now | Next |
 |---|---|---|---|
 | 1 | Pull | Tool-shaped JSON per pin (Semgrep, Trivy, ZAP, IaC, intake, GitHub analog). Provenance on every pull. | Swap adapters: bounty programs, disclosed reports, recon — same Pull type. |
-| 2 | Normalize / join | Canonical findings + explicit CLUSTERS (same-bug). Extra engine: `imported=true\|false\|null`. | Compile a knowledge graph. Layer 3 reads only the graph, never raw pulls. |
-| 3 | Query registry | Q-DELTA, Q-CLUSTER, Q-WORKLIST, Q-NOISE, Q-CLOSE, Q-GAPS, Q-PACKET, Q-FINDING. Refuse on empty. | Add intent queries (Q-SCOPE, Q-DUP, Q-IMPACT) without deleting the shared ones. |
+| 2 | Normalize / join | Canonical findings + explicit CLUSTERS (same-bug). Extra engine: `imported=true\|false\|null`. | Layer 3 already compiles this join. Keep Layer 2 as the materialize step. |
+| 3 | Knowledge / query | Compiled findings index. Named queries return subgraphs of pointers. Refuse on empty. Agents share the index. | Add intent queries (Q-SCOPE, Q-DUP, Q-IMPACT) without deleting the shared ones. |
 | 4 | Draft (probabilistic) | grok-4.5, task ∈ {triage, ticket, close, packet}, envelope ≤ 8000 chars, `max_tokens` 500, user-initiated. | Same core. New tasks: report, severity, submit-note. Still no writes. |
 
 ## Harness
@@ -93,7 +94,7 @@ of record. Not a live vendor export.
 A harness is the loop around the model: observation, context, control, action,
 state, verification. This app is that loop. The model is a subroutine.
 
-**States:** Pulls (observe) → Queries (context) → Triage (decide) → Tickets (write, human) → Packet (verify + sign).
+**States:** Pulls (observe) → Knowledge (index + named queries) → Triage (decide) → Tickets (write, human) → Packet (verify + sign).
 
 **Deterministic pool**
 
@@ -114,16 +115,19 @@ workflow without handing control flow to the model. Factor 8: own the DAG.
 
 ## Knowledge graph
 
-**Now:** undirected join graph: finding nodes, CLUSTERS edges, `relatedIds`.
-Enough to collapse SAST + DAST + intake.
+**Now:** compiled index of organized findings. Each record is a cluster or
+singleton with pointers to pulls, files, members, queries, tickets. Layer 3
+reads the index, never raw pulls. Compile on pull change.
 
 **Not yet:** not GraphRAG. Not hop queries. Not an evidence-centric store.
-Layer 3 still walks arrays.
+Delta counts still come from the finding script, not from a graph walk.
 
-**Contracted:** compiled graph as the only Layer 3 store. Nodes: pin, pull,
-finding, challenge, evidence, ticket, decision. Edges: same-bug, proves,
-supersedes, ticketed-as. Queries return subgraphs. Compile on pull change
-(Karpathy wiki), do not rebuild per draft.
+**Contracted:** evidence-centric store and hop queries stay out. Keep the index
+as pointers, not a second dump of PROTOCOL or raw pulls.
+
+The public map of this index is [`knowledge/INDEX.md`](knowledge/INDEX.md).
+Agents that need facts open one record and follow pointers. They do not load
+INDEX or PROTOCOL into a system prompt.
 
 ## Contracts
 
@@ -158,10 +162,11 @@ no-LLM evaluator, instruction/context/output caps, Q-CLUSTER / Q-FINDING shape.
 
 1. Stay on v17. v16 is the baseline pin already in the pulls.
 2. Open Pulls. Read raw JSON. Layer 1. Normalize is automatic and inspectable.
-3. Run Queries. Empty results refuse. These envelopes are the only thing a model may read.
-4. Walk Triage → Tickets → Packet once with Manual on. Sign it.
-5. Reset. Repeat with AI on. Same decisions, less typing. Drafts must cite envelope IDs.
-6. Score on Packet: short list, pins line up, tickets a developer can use, tools became decisions, no invented IDs.
+3. Open Knowledge. Organized findings, pointers only. This is what every agent that needs facts reads.
+4. Run Queries. They return subgraphs of the index. Empty results refuse. These envelopes are the only thing a model may read.
+5. Walk Triage → Tickets → Packet once with Manual on. Sign it.
+6. Reset. Repeat with AI on. Same decisions, less typing. Drafts must cite envelope IDs.
+7. Score on Packet: short list, pins line up, tickets a developer can use, tools became decisions, no invented IDs.
 
 ## Build
 
@@ -172,7 +177,7 @@ no-LLM evaluator, instruction/context/output caps, Q-CLUSTER / Q-FINDING shape.
 | Deterministic delta / drop / collapse / evaluator | shipped |
 | Envelope-only drafts, HITL apply/sign | shipped |
 | This protocol as single canonical copy | shipped |
-| Compiled knowledge graph (Layer 3 store) | contracted |
+| Organized findings index + pointers (Layer 3 store) | shipped |
 | Executable write hook beyond UI (AST / PreToolUse) | contracted |
 | Bug-bounty Layer 1 adapter + Q-SCOPE / Q-DUP / Q-IMPACT | contracted |
 | Independent eval harness as CI (no-LLM, regression-locked) | contracted |
@@ -204,5 +209,6 @@ exports.
 ## GitHub surface (Sebas)
 
 Sebas (`agents/sebas.md`) is the librarian for this record: layout, labels,
-issues, ADR index, README-as-map. It does not write application code. Mechanical
-git/PR is `se-release-engineer`. The two roles do not collapse.
+issues, ADR index, README-as-map, `knowledge/INDEX.md`. It does not write
+application code. Mechanical git/PR is `se-release-engineer`. The two roles do
+not collapse.

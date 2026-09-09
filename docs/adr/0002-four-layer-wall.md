@@ -51,3 +51,12 @@ bench.
   failed proof.
 - Layer 1 is the only layer we plan to swap for bug bounty (ADR 0004).
 - Invariants live in `engine.ts` / `queries.ts` / `ai.ts`, not in this file.
+
+## Amendment A1
+
+Accepted 2026-09-08 with ADR 0005. Layer 3 now reads a compiled findings index
+(`knowledge.ts`, map `knowledge/INDEX.md`). GraphRAG / hop queries remain not
+this bench. Delta counts remain a script. The contracted "compiled graph as
+the only Layer 3 store" row is discharged by the organized-findings index, not
+by GraphRAG.
+

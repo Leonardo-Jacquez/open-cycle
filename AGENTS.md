@@ -8,6 +8,7 @@ pointer, not a restatement.
 | Question | Read this |
 |---|---|
 | Intent, goal, constraints, proof, layers, harness, graph, contracts, port | `PROTOCOL.md` |
+| Organized findings (shared store, pointers not a dump) | `knowledge/INDEX.md` |
 | Why a decision was made | its ADR in `docs/adr/` |
 | Owner-facing status | `docs/STATE.md` |
 | GitHub surface (layout, labels, issues, map discipline) | `agents/sebas.md` |
@@ -36,8 +37,8 @@ Raising a cap needs an owner-ratified ADR.
 
 ## Harness
 
-The research bench *is* the loop: Pulls → Queries → Triage → Tickets → Packet.
-Deterministic: delta, drop rules, collapse, refuse-on-empty, no-LLM evaluator.
+The research bench *is* the loop: Pulls → Knowledge → Queries → Triage → Tickets → Packet.
+Deterministic: findings index, delta, drop rules, collapse, refuse-on-empty, no-LLM evaluator.
 Probabilistic: four draft tasks (`triage` \| `ticket` \| `close` \| `packet`).
 Control flow stays in code. The human picks the next named query.
 
