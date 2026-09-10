@@ -1,7 +1,8 @@
 # Where this project stands
 
-**Last verified:** 2026-09-08, protocol rev `2026-09-08`, ADR 0006 A1, SHA `9d172b8`.
-Measured against PROTOCOL.md in this tree, not relayed.
+**Last verified:** 2026-09-10, protocol rev `2026-09-10`, ADR draft
+`DRAFT-ai-poc-director-demo.md`, SHA `d04ba4f`. Measured against PROTOCOL.md
+in this tree, not relayed.
 
 This is the only owner-facing status file. `PROTOCOL.md` is the canon.
 `knowledge/INDEX.md` is the findings map. `docs/adr/` is why. Merged PRs on
@@ -10,20 +11,23 @@ this repo are the ground truth for the record.
 This repository is the **public protocol record**. The research bench UI is a
 separate runtime that renders `src/lib/appsec/protocol.ts`. Those facts must
 match PROTOCOL.md. The compiled index lives in `src/lib/appsec/knowledge.ts`.
-The DAG and collision scan live in `src/lib/appsec/orchestrate.ts`. Sebas fails
-a PR that restates the canon in README, AGENTS.md, or INDEX.md.
+The DAG and collision scan live in `src/lib/appsec/orchestrate.ts`. SDLC and
+tool-AI rows live in `src/lib/appsec/landscape.ts`. Sebas fails a PR that
+restates the canon in README, AGENTS.md, or INDEX.md.
 
 ## Built
 
 | Item | Notes |
 |---|---|
 | Four-layer wall on Juice Shop pins | `v16.0.0` (`a9b1dff`) baseline → `v17.0.0` (`1c04f0e`) current |
-| Named query registry + refuse-on-empty | Q-KNOW, Q-RECORD, Q-DELTA, Q-CLUSTER, Q-WORKLIST, Q-NOISE, Q-CLOSE, Q-GAPS, Q-PACKET, Q-FINDING |
+| Named query registry + refuse-on-empty | Q-KNOW, Q-RECORD, Q-DELTA, Q-CLUSTER, Q-WORKLIST, Q-NOISE, Q-CLOSE, Q-GAPS, Q-PACKET, Q-FINDING, Q-ORCH |
 | Deterministic delta / drop / collapse / evaluator | Scripts count. No-LLM packet score. |
 | Envelope-only drafts, HITL apply/sign | Four tasks. Model cannot mutate tickets or the packet. |
 | This protocol as single canonical copy | PROTOCOL.md (prose) · protocol.ts (Brief renders it) |
 | Organized findings index + pointers | `knowledge.ts` compile-once. Map: `knowledge/INDEX.md`. Agents follow pointers. |
-| Orchestrator DAG + collision scan | `orchestrate.ts` snapshot. Ready/done/blocked from cycle facts. Q-ORCH envelope. Sign blocked on X-GONE-OPEN. |
+| Orchestrator DAG + collision scan | `orchestrate.ts` snapshot. Ready/done/blocked from cycle facts. Q-ORCH envelope. Sign blocked on X-GONE-OPEN. Sign href is `/poc`. |
+| AI cycle POC on K-JWT | `draftCycle` (one click, max four envelopes). Accept ships the cluster, writes close evidence on JUICE-7 / JUICE-9, does not stamp. |
+| SDLC / tool-AI / VM / product-security map | `landscape.ts`. Brief SDLC tab. Public vendor docs, not a tenant. |
 | Sebas | GitHub librarian. Distinct from `se-release-engineer`. |
 
 ## Contracted
@@ -38,9 +42,13 @@ PROTOCOL.md BUILD table is the list. Each row has a labeled issue.
 
 ## Waiting on the owner
 
-None. Next prove: one Juice Shop cluster through the wall, human-signed packet,
-drafts citing index ids. On v17, Orch ready set is triage and close. JUICE-7
-and JUICE-9 stay X-GONE-OPEN until evidence is written. Sign stays blocked.
+Director demo: Run AI cycle → Accept drafts → Sign. Put their known manual
+stats in the contrast fields. Do not invent a tenant number. The bench only
+claims scripted Juice Shop counts.
+
+On a fresh v17 pin, Orch ready set is triage and close. JUICE-7 and JUICE-9
+stay X-GONE-OPEN until Accept writes evidence. Sign stays blocked until then.
+
 Then Layer 1 bounty adapter — swap adapters only.
 
 ## Standing rules that govern the record
@@ -55,6 +63,7 @@ Then Layer 1 bounty adapter — swap adapters only.
   logos, or Jira.
 - **Scripts count. Humans write. The model drafts.**
 - **Empty envelope → refuse.**
+- **Manual clicks on each finding are not the proof path.**
 - **Sebas does not write application code and does not push the default branch.**
 - **ADR numbers are claimed at merge** by the release engineer, not by the
   author at writing time. Authors write `docs/adr/DRAFT-<slug>.md`.

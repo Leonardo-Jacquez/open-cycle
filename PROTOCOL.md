@@ -1,6 +1,6 @@
 # Open Cycle — protocol
 
-**Rev:** 2026-09-08  
+**Rev:** 2026-09-10  
 **Language:** ASD-STE100 Issue 9  
 **Record:** https://github.com/Leonardo-Jacquez/open-cycle
 
@@ -12,7 +12,8 @@ write these sentences again. README.md is a map. AGENTS.md is a pointer. ADRs
 tell why. STATE.md tells the status now.
 
 Live rules are in `engine.ts`, `queries.ts`, `ai.ts`, `knowledge.ts`, and
-`orchestrate.ts`. Those rules are not in this file.
+`orchestrate.ts`. Those rules are not in this file. SDLC and tool-AI rows are
+in `landscape.ts`.
 
 Verbose text in this protocol uses ASD-STE100 Issue 9. Use approved words.
 Use one meaning for each word. Keep sentences short. Use the active voice.
@@ -28,7 +29,8 @@ Juice Shop, Semgrep, Trivy, ZAP, IaC, ADR, BUILD, PROTOCOL.md, Sebas,
 orchestrator, DAG, AppSec, pin, stand-in, reconstruction, bounty, SAST, SCA,
 DAST, DROP_RULES, packet, draft, sign, Q-DELTA, Q-CLUSTER, Q-WORKLIST,
 Q-NOISE, Q-CLOSE, Q-GAPS, Q-PACKET, Q-FINDING, Q-KNOW, Q-RECORD, Q-SCOPE,
-Q-ORCH, Q-DUP, Q-IMPACT, CLUSTERS, imported, no-LLM, 12-Factor Agents, grok-4.5.
+Q-ORCH, Q-DUP, Q-IMPACT, CLUSTERS, imported, no-LLM, 12-Factor Agents,
+grok-4.5, SDLC, VM, POC, K-JWT.
 
 ---
 
@@ -45,13 +47,14 @@ control the facts.
 
 This project is not a customer tenant. This project is not a CTF scoreboard.
 Do not count hours as the unit of work. This project is not a system of
-record. This project is not a live vendor export.
+record. This project is not a live vendor export. Manual clicks on each
+finding are not the proof path.
 
 ## Goal
 
 | | |
 |---|---|
-| **Show** | Do the AppSec cycle on public Juice Shop pins. The steps are pull, join, named query, draft, and human sign. |
+| **Show** | Run the AI cycle on public Juice Shop pins. Scripts count. The model drafts. Apply and sign are the director demo. |
 | **Then** | Change Layer 1 only. Then the same wall can do bug-bounty intake. The bounty tasks are scope, duplicates, impact, report, and submit or do not submit. |
 | **Keep** | Keep the query registry, refuse-on-empty, HITL writes, the independent evaluator, and the instruction contracts. |
 
@@ -141,6 +144,7 @@ a subroutine.
 
 - Sentence drafts from an envelope
 - Four small tasks. Not one large agent.
+- One user click drafts the four tasks. Apply and sign stay human.
 
 **Dynamic workflow:** The orchestrator publishes the DAG. The human selects a
 ready node. This is a dynamic workflow. The model must not control the flow.
@@ -189,20 +193,24 @@ Q-FINDING shape.
 | | AppSec (now) | Bug bounty (next) |
 |---|---|---|
 | Pull | Semgrep, Trivy, ZAP, IaC, challenge intake, JUICE-* tickets | Program scope, assets, disclosed-style reports, recon notes. Data must be public or from a program you own. |
-| Queries | Q-DELTA, Q-WORKLIST, Q-NOISE, Q-CLOSE, Q-GAPS, Q-PACKET | Q-SCOPE, Q-DUP, Q-IMPACT, plus shared Q-CLUSTER and Q-FINDING |
+| Queries | Q-ORCH, Q-DELTA, Q-WORKLIST, Q-NOISE, Q-CLOSE, Q-GAPS, Q-PACKET | Q-SCOPE, Q-DUP, Q-IMPACT, plus shared Q-CLUSTER and Q-FINDING |
 | Write | Sprint ticket and monthly packet | Report draft and submit or do not submit. A human still approves. |
 | Show | Two pinned Juice Shop tags. Challenge clusters are the cases. | Same wall. Drafts from envelopes only. Do not make assets. Collapse duplicates. Empty envelope must refuse. |
+
+## SDLC
+
+Public map of AppSec-tool AI, SDLC gates, VM, and product security. Live rows
+are in landscape.ts. This wall is the release and VM gate. Scanner-AI must
+not own rank or writes.
 
 ## Trial
 
 1. Keep the pin on v17. Pin v16 is the baseline in the pulls.
-2. Open Pulls. Read the raw JSON. This is Layer 1.
-3. Open Knowledge. Read organized findings and pointers only. Each agent that needs facts reads this index.
-4. Open the Orch tab. On v17 the ready set is triage and close. The scan marks JUICE-7 and JUICE-9 as X-GONE-OPEN. Sign stays blocked until evidence is written.
-5. Run Queries. Queries return subgraphs of the index. Empty results must refuse. The model can read these envelopes only.
-6. Do Triage, then Tickets, then Packet. Use Manual mode. Sign the packet.
-7. Reset. Do the cycle again with AI on. Drafts must use envelope IDs only.
-8. Score the packet. The list must be short. Tickets must name a file. Do not use IDs that are not in the envelope.
+2. Open the AI cycle. Run it on K-JWT. Named envelopes only. Empty must refuse.
+3. Accept drafts (one write). Close evidence must land on JUICE-7 and JUICE-9. Sign. That stamp is the director demo.
+4. Put their known manual stats in the contrast fields. Do not invent a tenant number.
+5. Open the SDLC tab. See where this gate sits next to scanner-AI and VM.
+6. Open Knowledge if you need pointers. Open Orch if you need the ready set.
 
 ## Build
 
@@ -215,6 +223,8 @@ Q-FINDING shape.
 | This protocol as one specified copy | shipped |
 | Organized findings index and pointers (Layer 3 store) | shipped |
 | Orchestrator DAG and collision scan | shipped |
+| AI cycle POC on K-JWT (draft / apply / sign) | shipped |
+| SDLC / tool-AI / VM / product-security map | shipped |
 | Verbose text to ASD-STE100 Issue 9 | shipped |
 | Executable write hook beyond UI (AST / PreToolUse) | contracted |
 | Bug-bounty Layer 1 adapter and Q-SCOPE / Q-DUP / Q-IMPACT | contracted |
