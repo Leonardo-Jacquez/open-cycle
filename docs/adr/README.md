@@ -23,5 +23,7 @@ change needs it.
 Landed: 0001 public sources · 0002 four-layer wall · 0003 deterministic shell ·
 0004 port Layer 1 · 0005 organized findings index · 0006 orchestrator.
 
+In flight: `DRAFT-ai-poc-director-demo.md` (AI cycle POC + public SDLC map).
+
 Sebas owns the index and the claim-at-merge reminder. Sebas does not assign
 the number — that is the release engineer, because the number is a git fact.
