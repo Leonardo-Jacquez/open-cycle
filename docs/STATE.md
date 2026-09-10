@@ -1,8 +1,8 @@
 # Where this project stands
 
 **Last verified:** 2026-09-10, protocol rev `2026-09-10`, ADR draft
-`DRAFT-ai-poc-director-demo.md`. SHA pending GitHub land. Measured against
-PROTOCOL.md in this tree, not relayed.
+`DRAFT-ai-poc-director-demo.md`, SHA `d04ba4f`. Measured against PROTOCOL.md
+in this tree, not relayed.
 
 This is the only owner-facing status file. `PROTOCOL.md` is the canon.
 `knowledge/INDEX.md` is the findings map. `docs/adr/` is why. Merged PRs on
